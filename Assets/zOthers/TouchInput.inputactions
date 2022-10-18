@@ -1,0 +1,154 @@
+{
+    "name": "TouchInput",
+    "maps": [
+        {
+            "name": "TouchControls",
+            "id": "f69246f5-42e5-43b6-a89a-ff87b90cd197",
+            "actions": [
+                {
+                    "name": "PrimaryTapContact",
+                    "type": "Button",
+                    "id": "803f73cb-596b-4d91-a3c9-e157852918f7",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "PrimaryTapPosition",
+                    "type": "Value",
+                    "id": "76d17120-c9e4-4b25-9042-c6754b136ec9",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "PrimaryHoldPosition",
+                    "type": "Value",
+                    "id": "b1d83950-ee11-428d-b02e-7a26b2b1ddb2",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "SecondaryHoldPosition",
+                    "type": "Value",
+                    "id": "293e5769-05d4-4e84-99f9-bd8627d0a25a",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "SecondaryHoldContact",
+                    "type": "Button",
+                    "id": "e1b6e439-37bf-44d9-9a49-839b69c6d467",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "PrimaryHoldDelta",
+                    "type": "Value",
+                    "id": "6060bb04-82ce-4f09-9599-7d1d7fee2495",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "SecondaryHoldDelta",
+                    "type": "Value",
+                    "id": "709c303e-4810-4203-a3a8-ce71a67edc69",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "ed02b80b-04b8-448a-8cd9-6bed10d2f4a3",
+                    "path": "<Touchscreen>/primaryTouch/press",
+                    "interactions": "Hold",
+                    "processors": "",
+                    "groups": "",
+                    "action": "PrimaryTapContact",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "82c4a47c-6ca0-45d5-9a10-82ea3e2832fe",
+                    "path": "<Touchscreen>/primaryTouch/position",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "PrimaryTapPosition",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "6a5b777f-4336-4f3d-97f2-f2e4ddcfb0fc",
+                    "path": "<Touchscreen>/primaryTouch/position",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "PrimaryHoldPosition",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "d8785cea-e113-4fb4-849e-15d55230c5e5",
+                    "path": "<Touchscreen>/touch1/position",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "SecondaryHoldPosition",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "68c4850a-3820-41db-aee3-84cba469c26f",
+                    "path": "<Touchscreen>/touch1/press",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "SecondaryHoldContact",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "997c91c1-6b7c-44b5-8b8e-0e934b97eb7c",
+                    "path": "<Touchscreen>/primaryTouch/delta",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "PrimaryHoldDelta",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "d4dfce0a-9c3a-47e1-b845-1506d56e37d1",
+                    "path": "<Touchscreen>/touch1/delta",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "SecondaryHoldDelta",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}
