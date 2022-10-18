@@ -152,11 +152,13 @@ public class InputManager : MonoBehaviour
     private void SecondaryHoldPositionStarted(InputAction.CallbackContext obj)
     {
         secondaryTapPosition = obj.ReadValue<Vector2>();
+        OnStartSecondaryTapPosition?.Invoke(secondaryTapPosition);
     }
 
     private void SecondaryHoldDeltaStarted(InputAction.CallbackContext obj)
     {
         secondaryHoldDelta = obj.ReadValue<Vector2>();
+        OnStartSecondaryHoldDelta?.Invoke(secondaryHoldDelta);
     }
     #endregion
 
@@ -186,16 +188,19 @@ public class InputManager : MonoBehaviour
     private void SecondaryHoldPositionCancelled(InputAction.CallbackContext obj)
     {
         secondaryTapContact = obj.ReadValueAsButton();
+        OnEndSecondaryTapContact?.Invoke();
     }
 
     private void SecondaryHoldContactCancelled(InputAction.CallbackContext obj)
     {
         secondaryTapPosition = obj.ReadValue<Vector2>();
+        OnEndSecondaryTapPosition?.Invoke(secondaryTapPosition);
     }
 
     private void SecondaryHoldDeltaCancelled(InputAction.CallbackContext obj)
     {
         secondaryHoldDelta = obj.ReadValue<Vector2>();
+        OnEndSecondaryHoldDelta?.Invoke(secondaryHoldDelta);
     }
     #endregion
 }
