@@ -6,7 +6,7 @@
             "id": "f69246f5-42e5-43b6-a89a-ff87b90cd197",
             "actions": [
                 {
-                    "name": "PrimaryTapContact",
+                    "name": "PanningContact",
                     "type": "Button",
                     "id": "803f73cb-596b-4d91-a3c9-e157852918f7",
                     "expectedControlType": "Button",
@@ -15,8 +15,8 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "PrimaryTapPosition",
-                    "type": "Value",
+                    "name": "PanningContactPosition",
+                    "type": "PassThrough",
                     "id": "76d17120-c9e4-4b25-9042-c6754b136ec9",
                     "expectedControlType": "Vector2",
                     "processors": "",
@@ -67,6 +67,24 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
+                },
+                {
+                    "name": "PlaceBuild",
+                    "type": "Button",
+                    "id": "84647447-54fd-493f-af8a-710f84887801",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "PlaceBuildPosition",
+                    "type": "Value",
+                    "id": "a4ac3015-c226-4e99-a1dc-c8d391633914",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
                 }
             ],
             "bindings": [
@@ -77,7 +95,7 @@
                     "interactions": "Hold",
                     "processors": "",
                     "groups": "",
-                    "action": "PrimaryTapContact",
+                    "action": "PanningContact",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -88,7 +106,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "PrimaryTapPosition",
+                    "action": "PanningContactPosition",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -144,6 +162,28 @@
                     "processors": "",
                     "groups": "",
                     "action": "SecondaryHoldDelta",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "713acc71-6717-4611-9025-c68bd0f45925",
+                    "path": "<Touchscreen>/primaryTouch/tap",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "PlaceBuild",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "bd6fcdb7-bcfb-4ba2-ab36-d5452cc613db",
+                    "path": "<Touchscreen>/primaryTouch/position",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "PlaceBuildPosition",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

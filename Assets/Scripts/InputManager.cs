@@ -1,15 +1,16 @@
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
+using System.Collections.Generic;
 
+[DefaultExecutionOrder(-1)]
 public class InputManager : MonoBehaviour
 {
+    public static InputManager instance;
+
     //Touch Input
     private TouchInput touchInput;
-    private TouchInput.TouchControlsActions touchControls;
 
     //Dynamic Values
     private bool primaryTapContact;
@@ -21,41 +22,40 @@ public class InputManager : MonoBehaviour
     private Vector2 secondaryHoldDelta;
 
     //Events
-    public delegate void StartPrimaryTapContact();
-    public delegate void StartPrimaryTapPosition(Vector2 position);
-    public delegate void StartPrimaryHoldDelta(Vector2 delta);
-    public delegate void StartSecondaryTapContact();
-    public delegate void StartSecondaryTapPosition(Vector2 position);
-    public delegate void StartSecondaryHoldDelta(Vector2 delta);
-
+    public delegate void StartPrimaryTapContact(Vector2 position);
+    public delegate void StartSecondaryTapContact(Vector2 position);
+    public delegate void StartBuildTapContact(Vector2 position);
     public delegate void EndPrimaryTapContact();
-    public delegate void EndPrimaryTapPosition(Vector2 position);
-    public delegate void EndPrimaryHoldDelta(Vector2 delta);
     public delegate void EndSecondaryTapContact();
-    public delegate void EndSecondaryTapPosition(Vector2 position);
-    public delegate void EndSecondaryHoldDelta(Vector2 delta);
+    public delegate void EndBuildTapContact();
 
     public event StartPrimaryTapContact OnStartPrimaryTapContact;
-    public event StartPrimaryTapPosition OnStartPrimaryTapPosition;
-    public event StartPrimaryHoldDelta OnStartPrimaryHoldDelta;
     public event StartSecondaryTapContact OnStartSecondaryTapContact;
-    public event StartSecondaryTapPosition OnStartSecondaryTapPosition;
-    public event StartSecondaryHoldDelta OnStartSecondaryHoldDelta;
-
     public event EndPrimaryTapContact OnEndPrimaryTapContact;
-    public event EndPrimaryTapPosition OnEndPrimaryTapPosition;
-    public event EndPrimaryHoldDelta OnEndPrimaryHoldDelta;
     public event EndSecondaryTapContact OnEndSecondaryTapContact;
-    public event EndSecondaryTapPosition OnEndSecondaryTapPosition;
-    public event EndSecondaryHoldDelta OnEndSecondaryHoldDelta;
+    public event StartBuildTapContact OnStartBuildTapContact;
+    public event EndBuildTapContact OnEndBuildTapContact;
 
     [Header("Debug")]
     [SerializeField] private TextMeshProUGUI debugText;
 
+    public InputAction PrimaryTapPositionAction => touchInput.TouchControls.PanningContactPosition;
+    public InputAction PrimaryHoldDeltaAction => touchInput.TouchControls.PrimaryHoldDelta;
+    public InputAction SecondaryTapPositionAction => touchInput.TouchControls.SecondaryHoldPosition;
+    public InputAction SecondaryHoldDeltaAction => touchInput.TouchControls.SecondaryHoldDelta;
+
     private void Awake()
     {
         touchInput = new TouchInput();
-        touchControls = touchInput.TouchControls;
+        instance = this;
+
+        touchInput.TouchControls.PanningContact.started += PanningContactStarted;
+        touchInput.TouchControls.SecondaryHoldContact.started += SecondaryHoldContactStarted;
+        touchInput.TouchControls.PlaceBuild.started += PlaceBuildStarted;
+
+        touchInput.TouchControls.PanningContact.canceled += PanningContactCancelled;
+        touchInput.TouchControls.SecondaryHoldContact.canceled += SecondaryHoldContactCancelled;
+        touchInput.TouchControls.PlaceBuild.canceled += PlaceBuildCancelled;
     }
 
     private void OnEnable()
@@ -66,23 +66,6 @@ public class InputManager : MonoBehaviour
     private void OnDisable()
     {
         touchInput.Disable();
-    }
-
-    private void Start()
-    {
-        touchControls.PrimaryTapContact.started += PrimaryTapContactStarted;
-        touchControls.PrimaryTapPosition.performed += PrimaryTapPositionStarted;
-        touchControls.PrimaryHoldDelta.started += PrimaryHoldDeltaStarted;
-        touchControls.SecondaryHoldContact.started += SecondaryHoldContactStarted;
-        touchControls.SecondaryHoldPosition.performed += SecondaryHoldPositionStarted;
-        touchControls.SecondaryHoldDelta.started += SecondaryHoldDeltaStarted;
-
-        touchControls.PrimaryTapContact.canceled += PrimaryTapContactCancelled;
-        touchControls.PrimaryTapPosition.canceled += PrimaryTapPositionCancelled;
-        touchControls.PrimaryHoldDelta.canceled += PrimaryHoldDeltaCancelled;
-        touchControls.SecondaryHoldContact.canceled += SecondaryHoldContactCancelled;
-        touchControls.SecondaryHoldPosition.canceled += SecondaryHoldPositionCancelled;
-        touchControls.SecondaryHoldDelta.canceled += SecondaryHoldDeltaCancelled; ;
     }
 
     private void Update()
@@ -98,11 +81,13 @@ public class InputManager : MonoBehaviour
                 $"SecondaryTapContact: {secondaryTapContact}\n" +
                 $"SecondaryTapPosition: {secondaryTapPosition}\n" +
                 $"SecondaryHoldDelta: {secondaryHoldDelta}\n" +
-                $"SecondaryHoldDelta (mg): {secondaryHoldDelta.magnitude}\n";
+                $"SecondaryHoldDelta (mg): {secondaryHoldDelta.magnitude}\n" +
+                $"Finger Distance: {Vector2.Distance(primaryTapPosition, secondaryTapPosition)}";
         }
     }
 
-    private bool IsTapOverUI(Vector2 tapPos)
+    //summary: Checks if the given screenpoint is over an UI element
+    public bool IsTapOverUI(Vector2 tapPos)
     {
         PointerEventData pointerEventData = new PointerEventData(EventSystem.current);
         pointerEventData.position = tapPos;
@@ -121,86 +106,40 @@ public class InputManager : MonoBehaviour
     }
 
     #region Started Or Performed
-    private void PrimaryTapContactStarted(InputAction.CallbackContext ctx)
+    private void PanningContactStarted(InputAction.CallbackContext ctx)
     {
         primaryTapContact = ctx.ReadValueAsButton();
-        OnStartPrimaryTapContact?.Invoke();
-    }
-
-    private void PrimaryTapPositionStarted(InputAction.CallbackContext ctx)
-    {
-        primaryTapPosition = ctx.ReadValue<Vector2>();
-        isOverUI = IsTapOverUI(primaryTapPosition);
-        if (!isOverUI)
-        {
-            OnStartPrimaryTapPosition?.Invoke(primaryTapPosition);
-        }
-    }
-
-    private void PrimaryHoldDeltaStarted(InputAction.CallbackContext context)
-    {
-        primaryHoldDelta = context.ReadValue<Vector2>();
-        OnStartPrimaryHoldDelta?.Invoke(primaryHoldDelta);
+        OnStartPrimaryTapContact?.Invoke(touchInput.TouchControls.PanningContactPosition.ReadValue<Vector2>());
     }
 
     private void SecondaryHoldContactStarted(InputAction.CallbackContext obj)
     {
         secondaryTapContact = obj.ReadValueAsButton();
-        OnStartSecondaryTapContact?.Invoke();
+        OnStartSecondaryTapContact?.Invoke(touchInput.TouchControls.SecondaryHoldPosition.ReadValue<Vector2>());
     }
 
-    private void SecondaryHoldPositionStarted(InputAction.CallbackContext obj)
+    private void PlaceBuildStarted(InputAction.CallbackContext obj)
     {
-        secondaryTapPosition = obj.ReadValue<Vector2>();
-        OnStartSecondaryTapPosition?.Invoke(secondaryTapPosition);
-    }
-
-    private void SecondaryHoldDeltaStarted(InputAction.CallbackContext obj)
-    {
-        secondaryHoldDelta = obj.ReadValue<Vector2>();
-        OnStartSecondaryHoldDelta?.Invoke(secondaryHoldDelta);
+        OnStartBuildTapContact?.Invoke(touchInput.TouchControls.PlaceBuildPosition.ReadValue<Vector2>());
     }
     #endregion
 
     #region Cancelled
-    private void PrimaryTapContactCancelled(InputAction.CallbackContext ctx)
+    private void PanningContactCancelled(InputAction.CallbackContext ctx)
     {
         primaryTapContact = ctx.ReadValueAsButton();
         OnEndPrimaryTapContact?.Invoke();
     }
 
-    private void PrimaryTapPositionCancelled(InputAction.CallbackContext obj)
-    {
-        primaryTapPosition = obj.ReadValue<Vector2>();
-        isOverUI = IsTapOverUI(primaryTapPosition);
-        if (!isOverUI)
-        {
-            OnEndPrimaryTapPosition?.Invoke(primaryTapPosition);
-        }
-    }
-
-    private void PrimaryHoldDeltaCancelled(InputAction.CallbackContext obj)
-    {
-        primaryHoldDelta = obj.ReadValue<Vector2>();
-        OnEndPrimaryHoldDelta?.Invoke(primaryHoldDelta);
-    } 
-
-    private void SecondaryHoldPositionCancelled(InputAction.CallbackContext obj)
+    private void SecondaryHoldContactCancelled(InputAction.CallbackContext obj)
     {
         secondaryTapContact = obj.ReadValueAsButton();
         OnEndSecondaryTapContact?.Invoke();
     }
 
-    private void SecondaryHoldContactCancelled(InputAction.CallbackContext obj)
+    private void PlaceBuildCancelled(InputAction.CallbackContext obj)
     {
-        secondaryTapPosition = obj.ReadValue<Vector2>();
-        OnEndSecondaryTapPosition?.Invoke(secondaryTapPosition);
-    }
-
-    private void SecondaryHoldDeltaCancelled(InputAction.CallbackContext obj)
-    {
-        secondaryHoldDelta = obj.ReadValue<Vector2>();
-        OnEndSecondaryHoldDelta?.Invoke(secondaryHoldDelta);
+        OnEndBuildTapContact?.Invoke();
     }
     #endregion
 }

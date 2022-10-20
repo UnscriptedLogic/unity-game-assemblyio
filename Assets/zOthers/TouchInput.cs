@@ -28,7 +28,7 @@ public partial class @TouchInput : IInputActionCollection2, IDisposable
             ""id"": ""f69246f5-42e5-43b6-a89a-ff87b90cd197"",
             ""actions"": [
                 {
-                    ""name"": ""PrimaryTapContact"",
+                    ""name"": ""PanningContact"",
                     ""type"": ""Button"",
                     ""id"": ""803f73cb-596b-4d91-a3c9-e157852918f7"",
                     ""expectedControlType"": ""Button"",
@@ -37,8 +37,8 @@ public partial class @TouchInput : IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""PrimaryTapPosition"",
-                    ""type"": ""Value"",
+                    ""name"": ""PanningContactPosition"",
+                    ""type"": ""PassThrough"",
                     ""id"": ""76d17120-c9e4-4b25-9042-c6754b136ec9"",
                     ""expectedControlType"": ""Vector2"",
                     ""processors"": """",
@@ -89,6 +89,24 @@ public partial class @TouchInput : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""PlaceBuild"",
+                    ""type"": ""Button"",
+                    ""id"": ""84647447-54fd-493f-af8a-710f84887801"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""PlaceBuildPosition"",
+                    ""type"": ""Value"",
+                    ""id"": ""a4ac3015-c226-4e99-a1dc-c8d391633914"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
                 }
             ],
             ""bindings"": [
@@ -99,7 +117,7 @@ public partial class @TouchInput : IInputActionCollection2, IDisposable
                     ""interactions"": ""Hold"",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""PrimaryTapContact"",
+                    ""action"": ""PanningContact"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -110,7 +128,7 @@ public partial class @TouchInput : IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""PrimaryTapPosition"",
+                    ""action"": ""PanningContactPosition"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -168,6 +186,28 @@ public partial class @TouchInput : IInputActionCollection2, IDisposable
                     ""action"": ""SecondaryHoldDelta"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""713acc71-6717-4611-9025-c68bd0f45925"",
+                    ""path"": ""<Touchscreen>/primaryTouch/tap"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""PlaceBuild"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""bd6fcdb7-bcfb-4ba2-ab36-d5452cc613db"",
+                    ""path"": ""<Touchscreen>/primaryTouch/position"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""PlaceBuildPosition"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -176,13 +216,15 @@ public partial class @TouchInput : IInputActionCollection2, IDisposable
 }");
         // TouchControls
         m_TouchControls = asset.FindActionMap("TouchControls", throwIfNotFound: true);
-        m_TouchControls_PrimaryTapContact = m_TouchControls.FindAction("PrimaryTapContact", throwIfNotFound: true);
-        m_TouchControls_PrimaryTapPosition = m_TouchControls.FindAction("PrimaryTapPosition", throwIfNotFound: true);
+        m_TouchControls_PanningContact = m_TouchControls.FindAction("PanningContact", throwIfNotFound: true);
+        m_TouchControls_PanningContactPosition = m_TouchControls.FindAction("PanningContactPosition", throwIfNotFound: true);
         m_TouchControls_PrimaryHoldPosition = m_TouchControls.FindAction("PrimaryHoldPosition", throwIfNotFound: true);
         m_TouchControls_SecondaryHoldPosition = m_TouchControls.FindAction("SecondaryHoldPosition", throwIfNotFound: true);
         m_TouchControls_SecondaryHoldContact = m_TouchControls.FindAction("SecondaryHoldContact", throwIfNotFound: true);
         m_TouchControls_PrimaryHoldDelta = m_TouchControls.FindAction("PrimaryHoldDelta", throwIfNotFound: true);
         m_TouchControls_SecondaryHoldDelta = m_TouchControls.FindAction("SecondaryHoldDelta", throwIfNotFound: true);
+        m_TouchControls_PlaceBuild = m_TouchControls.FindAction("PlaceBuild", throwIfNotFound: true);
+        m_TouchControls_PlaceBuildPosition = m_TouchControls.FindAction("PlaceBuildPosition", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -242,24 +284,28 @@ public partial class @TouchInput : IInputActionCollection2, IDisposable
     // TouchControls
     private readonly InputActionMap m_TouchControls;
     private ITouchControlsActions m_TouchControlsActionsCallbackInterface;
-    private readonly InputAction m_TouchControls_PrimaryTapContact;
-    private readonly InputAction m_TouchControls_PrimaryTapPosition;
+    private readonly InputAction m_TouchControls_PanningContact;
+    private readonly InputAction m_TouchControls_PanningContactPosition;
     private readonly InputAction m_TouchControls_PrimaryHoldPosition;
     private readonly InputAction m_TouchControls_SecondaryHoldPosition;
     private readonly InputAction m_TouchControls_SecondaryHoldContact;
     private readonly InputAction m_TouchControls_PrimaryHoldDelta;
     private readonly InputAction m_TouchControls_SecondaryHoldDelta;
+    private readonly InputAction m_TouchControls_PlaceBuild;
+    private readonly InputAction m_TouchControls_PlaceBuildPosition;
     public struct TouchControlsActions
     {
         private @TouchInput m_Wrapper;
         public TouchControlsActions(@TouchInput wrapper) { m_Wrapper = wrapper; }
-        public InputAction @PrimaryTapContact => m_Wrapper.m_TouchControls_PrimaryTapContact;
-        public InputAction @PrimaryTapPosition => m_Wrapper.m_TouchControls_PrimaryTapPosition;
+        public InputAction @PanningContact => m_Wrapper.m_TouchControls_PanningContact;
+        public InputAction @PanningContactPosition => m_Wrapper.m_TouchControls_PanningContactPosition;
         public InputAction @PrimaryHoldPosition => m_Wrapper.m_TouchControls_PrimaryHoldPosition;
         public InputAction @SecondaryHoldPosition => m_Wrapper.m_TouchControls_SecondaryHoldPosition;
         public InputAction @SecondaryHoldContact => m_Wrapper.m_TouchControls_SecondaryHoldContact;
         public InputAction @PrimaryHoldDelta => m_Wrapper.m_TouchControls_PrimaryHoldDelta;
         public InputAction @SecondaryHoldDelta => m_Wrapper.m_TouchControls_SecondaryHoldDelta;
+        public InputAction @PlaceBuild => m_Wrapper.m_TouchControls_PlaceBuild;
+        public InputAction @PlaceBuildPosition => m_Wrapper.m_TouchControls_PlaceBuildPosition;
         public InputActionMap Get() { return m_Wrapper.m_TouchControls; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -269,12 +315,12 @@ public partial class @TouchInput : IInputActionCollection2, IDisposable
         {
             if (m_Wrapper.m_TouchControlsActionsCallbackInterface != null)
             {
-                @PrimaryTapContact.started -= m_Wrapper.m_TouchControlsActionsCallbackInterface.OnPrimaryTapContact;
-                @PrimaryTapContact.performed -= m_Wrapper.m_TouchControlsActionsCallbackInterface.OnPrimaryTapContact;
-                @PrimaryTapContact.canceled -= m_Wrapper.m_TouchControlsActionsCallbackInterface.OnPrimaryTapContact;
-                @PrimaryTapPosition.started -= m_Wrapper.m_TouchControlsActionsCallbackInterface.OnPrimaryTapPosition;
-                @PrimaryTapPosition.performed -= m_Wrapper.m_TouchControlsActionsCallbackInterface.OnPrimaryTapPosition;
-                @PrimaryTapPosition.canceled -= m_Wrapper.m_TouchControlsActionsCallbackInterface.OnPrimaryTapPosition;
+                @PanningContact.started -= m_Wrapper.m_TouchControlsActionsCallbackInterface.OnPanningContact;
+                @PanningContact.performed -= m_Wrapper.m_TouchControlsActionsCallbackInterface.OnPanningContact;
+                @PanningContact.canceled -= m_Wrapper.m_TouchControlsActionsCallbackInterface.OnPanningContact;
+                @PanningContactPosition.started -= m_Wrapper.m_TouchControlsActionsCallbackInterface.OnPanningContactPosition;
+                @PanningContactPosition.performed -= m_Wrapper.m_TouchControlsActionsCallbackInterface.OnPanningContactPosition;
+                @PanningContactPosition.canceled -= m_Wrapper.m_TouchControlsActionsCallbackInterface.OnPanningContactPosition;
                 @PrimaryHoldPosition.started -= m_Wrapper.m_TouchControlsActionsCallbackInterface.OnPrimaryHoldPosition;
                 @PrimaryHoldPosition.performed -= m_Wrapper.m_TouchControlsActionsCallbackInterface.OnPrimaryHoldPosition;
                 @PrimaryHoldPosition.canceled -= m_Wrapper.m_TouchControlsActionsCallbackInterface.OnPrimaryHoldPosition;
@@ -290,16 +336,22 @@ public partial class @TouchInput : IInputActionCollection2, IDisposable
                 @SecondaryHoldDelta.started -= m_Wrapper.m_TouchControlsActionsCallbackInterface.OnSecondaryHoldDelta;
                 @SecondaryHoldDelta.performed -= m_Wrapper.m_TouchControlsActionsCallbackInterface.OnSecondaryHoldDelta;
                 @SecondaryHoldDelta.canceled -= m_Wrapper.m_TouchControlsActionsCallbackInterface.OnSecondaryHoldDelta;
+                @PlaceBuild.started -= m_Wrapper.m_TouchControlsActionsCallbackInterface.OnPlaceBuild;
+                @PlaceBuild.performed -= m_Wrapper.m_TouchControlsActionsCallbackInterface.OnPlaceBuild;
+                @PlaceBuild.canceled -= m_Wrapper.m_TouchControlsActionsCallbackInterface.OnPlaceBuild;
+                @PlaceBuildPosition.started -= m_Wrapper.m_TouchControlsActionsCallbackInterface.OnPlaceBuildPosition;
+                @PlaceBuildPosition.performed -= m_Wrapper.m_TouchControlsActionsCallbackInterface.OnPlaceBuildPosition;
+                @PlaceBuildPosition.canceled -= m_Wrapper.m_TouchControlsActionsCallbackInterface.OnPlaceBuildPosition;
             }
             m_Wrapper.m_TouchControlsActionsCallbackInterface = instance;
             if (instance != null)
             {
-                @PrimaryTapContact.started += instance.OnPrimaryTapContact;
-                @PrimaryTapContact.performed += instance.OnPrimaryTapContact;
-                @PrimaryTapContact.canceled += instance.OnPrimaryTapContact;
-                @PrimaryTapPosition.started += instance.OnPrimaryTapPosition;
-                @PrimaryTapPosition.performed += instance.OnPrimaryTapPosition;
-                @PrimaryTapPosition.canceled += instance.OnPrimaryTapPosition;
+                @PanningContact.started += instance.OnPanningContact;
+                @PanningContact.performed += instance.OnPanningContact;
+                @PanningContact.canceled += instance.OnPanningContact;
+                @PanningContactPosition.started += instance.OnPanningContactPosition;
+                @PanningContactPosition.performed += instance.OnPanningContactPosition;
+                @PanningContactPosition.canceled += instance.OnPanningContactPosition;
                 @PrimaryHoldPosition.started += instance.OnPrimaryHoldPosition;
                 @PrimaryHoldPosition.performed += instance.OnPrimaryHoldPosition;
                 @PrimaryHoldPosition.canceled += instance.OnPrimaryHoldPosition;
@@ -315,18 +367,26 @@ public partial class @TouchInput : IInputActionCollection2, IDisposable
                 @SecondaryHoldDelta.started += instance.OnSecondaryHoldDelta;
                 @SecondaryHoldDelta.performed += instance.OnSecondaryHoldDelta;
                 @SecondaryHoldDelta.canceled += instance.OnSecondaryHoldDelta;
+                @PlaceBuild.started += instance.OnPlaceBuild;
+                @PlaceBuild.performed += instance.OnPlaceBuild;
+                @PlaceBuild.canceled += instance.OnPlaceBuild;
+                @PlaceBuildPosition.started += instance.OnPlaceBuildPosition;
+                @PlaceBuildPosition.performed += instance.OnPlaceBuildPosition;
+                @PlaceBuildPosition.canceled += instance.OnPlaceBuildPosition;
             }
         }
     }
     public TouchControlsActions @TouchControls => new TouchControlsActions(this);
     public interface ITouchControlsActions
     {
-        void OnPrimaryTapContact(InputAction.CallbackContext context);
-        void OnPrimaryTapPosition(InputAction.CallbackContext context);
+        void OnPanningContact(InputAction.CallbackContext context);
+        void OnPanningContactPosition(InputAction.CallbackContext context);
         void OnPrimaryHoldPosition(InputAction.CallbackContext context);
         void OnSecondaryHoldPosition(InputAction.CallbackContext context);
         void OnSecondaryHoldContact(InputAction.CallbackContext context);
         void OnPrimaryHoldDelta(InputAction.CallbackContext context);
         void OnSecondaryHoldDelta(InputAction.CallbackContext context);
+        void OnPlaceBuild(InputAction.CallbackContext context);
+        void OnPlaceBuildPosition(InputAction.CallbackContext context);
     }
 }
