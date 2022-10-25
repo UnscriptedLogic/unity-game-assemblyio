@@ -437,7 +437,7 @@ GameObject:
   - component: {fileID: 4793254995290790286}
   - component: {fileID: 4793254995290790287}
   m_Layer: 7
-  m_Name: LTurnConveyorBlet
+  m_Name: LTurnConveyorBelt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
