@@ -94,7 +94,7 @@ namespace BuildManagement
 
         private void OnRotateMode()
         {
-            UINavigator.PopAndPush("Rotate");
+            UINavigator.PopAndPush("RotateMode");
             canRotate = true;
         }
 
@@ -118,6 +118,7 @@ namespace BuildManagement
 
                 if (canBuild)
                 {
+
                     BuildTower(potentialBuildPos, ray);
                 }
 
@@ -158,6 +159,10 @@ namespace BuildManagement
             if (Physics.Raycast(ray, out RaycastHit hit, 100f, buildLayer))
             {
                 Vector3Int cellPos = grid.WorldToCell(hit.point);
+
+                GameObject testObj = GameObject.CreatePrimitive(PrimitiveType.Cube);
+                testObj.transform.position = new Vector3(cellPos.x, hit.point.y, cellPos.y);
+
                 return grid.CellToWorld(cellPos);
             }
 

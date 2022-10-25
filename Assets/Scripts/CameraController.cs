@@ -53,8 +53,11 @@ namespace CameraManagement
         private void StartPrimaryTapContact(Vector2 tapPos)
         {
             StopAllCoroutines();
-            panCoroutine = StartCoroutine(PanCamera());
 
+            if (!inputManager.IsTapOverUI(tapPos))
+            {
+                panCoroutine = StartCoroutine(PanCamera());
+            }
         }
  
         private void OnEndPrimaryTapContact()
