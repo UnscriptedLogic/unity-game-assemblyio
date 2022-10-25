@@ -8,7 +8,6 @@ namespace CameraManagement
         [SerializeField] private Camera cam;
         [SerializeField] private float panspeed = 5f;
         [SerializeField] private float zoomSpeed = 5f;
-        [SerializeField] private float deltaZoomCap = 200f;
         [SerializeField] private Vector2 xpanLimits;
         [SerializeField] private Vector2 zpanLimits;
         [SerializeField] private Vector2 zoomLimits;
@@ -87,12 +86,12 @@ namespace CameraManagement
             while (true)
             {
                 float currFingerDist = Vector2.Distance(inputManager.SecondaryTapPositionAction.ReadValue<Vector2>(), inputManager.PrimaryTapPositionAction.ReadValue<Vector2>());
-                float deltaSpeed = deltaZoomCap * 0.01f * Mathf.Max(inputManager.PrimaryTapPositionAction.ReadValue<Vector2>().magnitude, inputManager.SecondaryTapPositionAction.ReadValue<Vector2>().magnitude);
+                float delta = zoomSpeed * 0.01f * Mathf.Clamp(inputManager.PrimaryHoldDeltaAction.ReadValue<Vector2>().magnitude, 0, 100f);
 
                 //Zoom out
                 if (currFingerDist < prevFingerDist)
                 {
-                    Vector3 targetPos = transform.position - transform.forward * currFingerDist * (zoomSpeed * (deltaSpeed * 0.01f)) * Time.deltaTime;
+                    Vector3 targetPos = transform.position - transform.forward * delta * Time.deltaTime;
                     targetPos.y = Mathf.Clamp(targetPos.y, zoomLimits.x, zoomLimits.y);
                     targetPos.z = Mathf.Clamp(targetPos.z, zpanLimits.x, zpanLimits.y);
                     transform.position = targetPos;
@@ -101,7 +100,7 @@ namespace CameraManagement
                 //Zoom in
                 else if (currFingerDist > prevFingerDist)
                 {
-                    Vector3 targetPos = transform.position + transform.forward * currFingerDist * (zoomSpeed * (deltaSpeed * 0.01f)) * Time.deltaTime;
+                    Vector3 targetPos = transform.position + transform.forward * delta * Time.deltaTime;
                     targetPos.y = Mathf.Clamp(targetPos.y, zoomLimits.x, zoomLimits.y);
                     targetPos.z = Mathf.Clamp(targetPos.z, zpanLimits.x, zpanLimits.y);
                     transform.position = targetPos;

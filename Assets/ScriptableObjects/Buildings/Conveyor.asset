@@ -10,7 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: bcfc8a9ea688f0a4c8a49a91db146a0a, type: 3}
-  m_Name: TestBuilding
+  m_Name: Conveyor
   m_EditorClassIdentifier: 
-  prefab: {fileID: 8655941470499086776, guid: 6cf7af3a2cf7ad646a7a2e2f107448ef, type: 3}
-  cost: 0
+  buildingIcon: {fileID: 21300000, guid: 9ef7e15cab1db4c41937739860b940b0, type: 3}
+  prefab: {fileID: 4502507534157176065, guid: 0e2b1499937791d4da7aa104c795be52, type: 3}
+  cost: 25

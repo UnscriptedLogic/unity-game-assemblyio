@@ -75,14 +75,14 @@ public class InputManager : MonoBehaviour
             debugText.text =
                 $"PrimaryTapContact: {primaryTapContact}\n" +
                 $"PrimaryTapPosition: {primaryTapPosition}\n" +
-                $"PrimaryHoldDelta: {primaryHoldDelta}\n" +
-                $"PrimaryHoldDelta (mg): {primaryHoldDelta.magnitude}\n" +
+                $"PrimaryHoldDelta: {touchInput.TouchControls.PrimaryHoldDelta.ReadValue<Vector2>()}\n" +
+                $"PrimaryHoldDelta (mg): {touchInput.TouchControls.PrimaryHoldDelta.ReadValue<Vector2>().magnitude}\n" +
                 $"IsOverUI: {isOverUI}\n" +
                 $"SecondaryTapContact: {secondaryTapContact}\n" +
                 $"SecondaryTapPosition: {secondaryTapPosition}\n" +
                 $"SecondaryHoldDelta: {secondaryHoldDelta}\n" +
                 $"SecondaryHoldDelta (mg): {secondaryHoldDelta.magnitude}\n" +
-                $"Finger Distance: {Vector2.Distance(primaryTapPosition, secondaryTapPosition)}";
+                $"Finger Distance: {Vector2.Distance(primaryTapPosition, secondaryTapPosition)}\n";
         }
     }
 
