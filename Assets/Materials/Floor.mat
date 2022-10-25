@@ -63,15 +63,15 @@ Material:
     - _EdgeDiffuse: 0.001
     - _EdgeDistanceAttenuation: 0.001
     - _EdgeRim: 0.001
-    - _EdgeShadowAttenuation: 1
+    - _EdgeShadowAttenuation: 2
     - _EdgeSpecular: 0.001
     - _QueueControl: 0
     - _QueueOffset: 0
-    - _RimAmount: 0.25
-    - _RimStrength: 1
-    - _RimThreshold: 0.15
-    - _Smoothness: 0.587
+    - _RimAmount: 0.113
+    - _RimStrength: 0.495
+    - _RimThreshold: 0.01
+    - _Smoothness: 0
     m_Colors:
-    - _AmbientColor: {r: 0, g: 0, b: 0, a: 1}
-    - _BaseColor: {r: 0.18814524, g: 0.23534982, b: 0.26415092, a: 1}
+    - _AmbientColor: {r: 1, g: 1, b: 1, a: 1}
+    - _BaseColor: {r: 0.066037714, g: 0.066037714, b: 0.066037714, a: 1}
   m_BuildTextureStacks: []

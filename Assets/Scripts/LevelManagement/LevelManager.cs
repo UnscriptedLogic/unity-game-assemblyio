@@ -1,3 +1,4 @@
+using BuildManagement;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -9,6 +10,8 @@ namespace LevelManagement
 {
     public class LevelManager : MonoBehaviour
     {
+        [SerializeField] private BuildManager buildManager;
+
         [Header("Construct Mode")]
         [SerializeField] private Button constructMode;
         [SerializeField] private Button bluePrintsMode;
@@ -25,6 +28,7 @@ namespace LevelManagement
         {
             UINavigator.PopAndPush("ConstructPersistent");
             UINavigator.Push("Construct");
+            buildManager.OnEnterConstructMode();
         }
 
         private void OnBlueprintMode()

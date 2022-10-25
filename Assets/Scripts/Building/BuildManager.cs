@@ -33,6 +33,7 @@ namespace BuildManagement
         [SerializeField] private Button removeButton;
         [SerializeField] private Button rotateButton;
         [SerializeField] private Button doneButton;
+        [SerializeField] private GameObject gridVisual;
 
         private void Start()
         {
@@ -71,6 +72,16 @@ namespace BuildManagement
             inputManager.OnStartBuildTapContact -= OnStartTapContact;
         }
 
+        public void OnEnterConstructMode()
+        {
+            gridVisual.SetActive(true);
+        }
+
+        private void OnExitConstructMode()
+        {
+            gridVisual.SetActive(false);
+        }
+
         private void OnDoneButtonPressed()
         {
             canBuild = false;
@@ -81,6 +92,7 @@ namespace BuildManagement
             {
                 UINavigator.Pop(); //Pops construct page
                 UINavigator.PopAndPush("Main"); //Pops persistent page
+                OnExitConstructMode();
                 return;
             }
 
@@ -139,7 +151,7 @@ namespace BuildManagement
             //Uses existing building as correction point
             if (Physics.Raycast(ray, out RaycastHit hitinfo, 100f, buildingLayer))
             {
-                potentialBuildPos = grid.CellToWorld(grid.WorldToCell(hitinfo.transform.position + hitinfo.normal.normalized));
+                potentialBuildPos = grid.CellToWorld(grid.WorldToCell(hitinfo.transform.position + hitinfo.normal.normalized)) + new Vector3(0.5f, 0f, 0.5f);
             }
 
             if (!Physics.CheckSphere(potentialBuildPos, 0.25f, buildingLayer))
@@ -159,11 +171,7 @@ namespace BuildManagement
             if (Physics.Raycast(ray, out RaycastHit hit, 100f, buildLayer))
             {
                 Vector3Int cellPos = grid.WorldToCell(hit.point);
-
-                GameObject testObj = GameObject.CreatePrimitive(PrimitiveType.Cube);
-                testObj.transform.position = new Vector3(cellPos.x, hit.point.y, cellPos.y);
-
-                return grid.CellToWorld(cellPos);
+                return grid.CellToWorld(cellPos) + new Vector3(0.5f, 0f, 0.5f);
             }
 
             return Vector3.zero;
