@@ -153,7 +153,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.38714847, g: 0.6143709, b: 0.9433962, a: 1}
+  m_Color: {r: 0.9150943, g: 0.719872, b: 0.30647027, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -244,7 +244,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.21359916, g: 0.37285414, b: 0.6037736, a: 1}
+  m_Color: {r: 0.6039216, g: 0.46248126, b: 0.21176468, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -320,7 +320,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.21359916, g: 0.37285414, b: 0.6037736, a: 1}
+  m_Color: {r: 0.6039216, g: 0.4627451, b: 0.21176471, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -448,6 +448,10 @@ MonoBehaviour:
   icon: {fileID: 7698864257667208432}
   nameTMP: {fileID: 7698864258705929248}
   costTMP: {fileID: 7698864258969892586}
+  bg: {fileID: 7698864258207716289}
+  bgPrice: {fileID: 7698864259738535405}
+  bgBorder: {fileID: 7698864258231871112}
+  bgPriceBorder: {fileID: 7698864258375244886}
 --- !u!1 &7698864258705929250
 GameObject:
   m_ObjectHideFlags: 0
@@ -483,8 +487,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: 0, y: 18.7098}
-  m_SizeDelta: {x: 0, y: 37.4196}
+  m_AnchoredPosition: {x: 0, y: 23.4988}
+  m_SizeDelta: {x: -10.0957, y: 46.9977}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7698864258705929263
 CanvasRenderer:
@@ -514,7 +518,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Name
+  m_text: R Turn Belt
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8ab47869fff7cc241a671a0606c51aa9, type: 2}
   m_sharedMaterial: {fileID: -7162616806732892334, guid: 8ab47869fff7cc241a671a0606c51aa9,
@@ -542,7 +546,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 27.4
+  m_fontSize: 24.85
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -578,7 +582,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 5, y: 5, z: 5, w: 5}
+  m_margin: {x: 10, y: 10, z: 10, w: 10}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -782,7 +786,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.17225882, g: 0.3049208, b: 0.46226418, a: 1}
+  m_Color: {r: 0.4627451, g: 0.3434573, b: 0.17254905, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1

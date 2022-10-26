@@ -10,8 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: bcfc8a9ea688f0a4c8a49a91db146a0a, type: 3}
-  m_Name: Conveyor
+  m_Name: StraightBelt
   m_EditorClassIdentifier: 
   buildingIcon: {fileID: 21300000, guid: 9ef7e15cab1db4c41937739860b940b0, type: 3}
   prefab: {fileID: 4502507534157176065, guid: 0e2b1499937791d4da7aa104c795be52, type: 3}
   cost: 25
+  bgColor: {r: 0.3882353, g: 0.6156863, b: 0.94509804, a: 1}
+  bgPriceColor: {r: 0.17254902, g: 0.30588236, b: 0.4627451, a: 1}
+  borderColor: {r: 0.21176471, g: 0.37254903, b: 0.6039216, a: 1}

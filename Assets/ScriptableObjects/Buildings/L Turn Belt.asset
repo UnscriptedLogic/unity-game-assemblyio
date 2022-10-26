@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bcfc8a9ea688f0a4c8a49a91db146a0a, type: 3}
+  m_Name: L Turn Belt
+  m_EditorClassIdentifier: 
+  buildingIcon: {fileID: 21300000, guid: bcaab5fee36fec84197893b08fdc7e28, type: 3}
+  prefab: {fileID: 5504735273182814562, guid: 9e478742e0b0c7541874e1158b1fdc4f, type: 3}
+  cost: 25
+  bgColor: {r: 0.3882353, g: 0.6156863, b: 0.94509804, a: 1}
+  bgPriceColor: {r: 0.17254902, g: 0.30588236, b: 0.4627451, a: 1}
+  borderColor: {r: 0.21176471, g: 0.37254903, b: 0.6039216, a: 1}

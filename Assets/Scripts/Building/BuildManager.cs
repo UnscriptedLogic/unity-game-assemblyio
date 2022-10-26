@@ -112,7 +112,8 @@ namespace BuildManagement
 
         private void OnRemoveMode()
         {
-            UINavigator.PopAndPush("Remove");
+            UINavigator.PopAndPush("RemoveMode");
+            canRemove = true;
         }
 
         private void OnStartTapContact(Vector2 position)
@@ -141,7 +142,7 @@ namespace BuildManagement
 
                 if (canRemove)
                 {
-
+                    RemoveTower(potentialBuildPos);
                 }
             }
         }
@@ -163,6 +164,11 @@ namespace BuildManagement
         private void RotateTower(Vector3 potentialTowerPosition)
         {
             Physics.OverlapSphere(potentialTowerPosition, 0.25f, buildingLayer)[0].transform.rotation *= Quaternion.Euler(0, 90, 0);
+        }
+
+        private void RemoveTower(Vector3 potentialTowerPosition)
+        {
+            Destroy(Physics.OverlapSphere(potentialTowerPosition, 0.25f, buildingLayer)[0].gameObject);
         }
 
         private Vector3 GetWorldPosition(Vector2 tapPos)
