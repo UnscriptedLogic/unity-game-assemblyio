@@ -22,6 +22,10 @@ namespace LevelManagement
             constructMode.onClick.AddListener(OnConstructMode);
             bluePrintsMode.onClick.AddListener(OnBlueprintMode);
             settingsMode.onClick.AddListener(OnSettingsMode);
+
+            UINavigator.PopAll();
+            UINavigator.Push("Persistent");
+            UINavigator.Push("Main");
         }
 
         private void OnConstructMode()
