@@ -105032,6 +105032,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 128
   levelManager: {fileID: 1049954265}
+  currencyManager: {fileID: 0}
   grid: {fileID: 1170825589}
   cam: {fileID: 330585545}
   buildingButtonPrefab: {fileID: 7698864258463681325, guid: d41b5056017eaca43948d467e5739c41,

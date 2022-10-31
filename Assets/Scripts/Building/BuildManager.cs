@@ -24,7 +24,8 @@ namespace BuildManagement
 
         [Header("Components")]
         private InputManager inputManager;
-        [SerializeField] LevelManager levelManager;
+        [SerializeField] private LevelManager levelManager;
+        [SerializeField] private CurrencyManager currencyManager;
         [SerializeField] private Grid grid;
         [SerializeField] private Camera cam;
         [SerializeField] private GameObject buildingButtonPrefab;
@@ -34,6 +35,8 @@ namespace BuildManagement
         [SerializeField] private Button rotateButton;
         [SerializeField] private Button doneButton;
         [SerializeField] private GameObject gridVisual;
+
+        private List<BuildingButton> buyButtons = new List<BuildingButton>();
 
         private void Start()
         {
@@ -58,6 +61,19 @@ namespace BuildManagement
                     currentBuilding = buildingSO;
                     canBuild = true;
                 });
+
+                buyButtons.Add(buildingButtonScript);
+            }
+
+            currencyManager = CurrencyManager.instance;
+            currencyManager.onCurrencyUpdated += OnCurrencyUpdated;
+        }
+
+        private void OnCurrencyUpdated(int currentAmount)
+        {
+            for (int i = 0; i < buyButtons.Count; i++)
+            {
+
             }
         }
 
