@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class CurrencyManager : MonoBehaviour
@@ -7,6 +9,8 @@ public class CurrencyManager : MonoBehaviour
     public static CurrencyManager instance;
 
     [SerializeField] private int startingCurrency = 100;
+    [SerializeField] private TextMeshProUGUI currencyTMP;
+
     private int currentCurrency = 0;
 
     public int CurrentCurrency => currentCurrency;
@@ -17,6 +21,12 @@ public class CurrencyManager : MonoBehaviour
     private void Awake()
     {
         instance = this;
+        onCurrencyUpdated += CurrencyUpdated;
+    }
+
+    private void CurrencyUpdated(int currentAmount)
+    {
+        currencyTMP.text = currentAmount.ToString();
     }
 
     private void Start()
@@ -35,5 +45,10 @@ public class CurrencyManager : MonoBehaviour
     {
         currentCurrency -= amount;
         onCurrencyUpdated?.Invoke(currentCurrency);
+    }
+
+    public bool CanAfford(int amount)
+    {
+        return currentCurrency >= amount;
     }
 }

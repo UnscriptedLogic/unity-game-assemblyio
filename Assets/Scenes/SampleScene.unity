@@ -1668,6 +1668,51 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &523664424
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 523664425}
+  - component: {fileID: 523664426}
+  m_Layer: 0
+  m_Name: CurrencyManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &523664425
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 523664424}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1049954264}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &523664426
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 523664424}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 465dca4ff4e8e1c4f85e359592296b63, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  startingCurrency: 100
 --- !u!1 &580082506
 GameObject:
   m_ObjectHideFlags: 0
@@ -102303,6 +102348,7 @@ Transform:
   m_Children:
   - {fileID: 1352054274}
   - {fileID: 1918575149}
+  - {fileID: 523664425}
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -105025,6 +105071,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 2032c7254d94f3b43a24306f250e1db2, type: 2}
   - {fileID: 11400000, guid: fd7bb6a3998202447b858eafe18cd6f8, type: 2}
   - {fileID: 11400000, guid: b0e4ac5460b2ecc418adcc090c880b00, type: 2}
+  - {fileID: 11400000, guid: 0b5d0032f19b6bf4f85b335a50966935, type: 2}
   buildLayer:
     serializedVersion: 2
     m_Bits: 64
@@ -105032,7 +105079,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 128
   levelManager: {fileID: 1049954265}
-  currencyManager: {fileID: 0}
+  currencyManager: {fileID: 523664426}
   grid: {fileID: 1170825589}
   cam: {fileID: 330585545}
   buildingButtonPrefab: {fileID: 7698864258463681325, guid: d41b5056017eaca43948d467e5739c41,

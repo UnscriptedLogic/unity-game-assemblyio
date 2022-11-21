@@ -71,10 +71,7 @@ namespace BuildManagement
 
         private void OnCurrencyUpdated(int currentAmount)
         {
-            for (int i = 0; i < buyButtons.Count; i++)
-            {
 
-            }
         }
 
         private void OnEnable()
@@ -173,7 +170,10 @@ namespace BuildManagement
 
             if (!Physics.CheckSphere(potentialBuildPos, 0.25f, buildingLayer))
             {
-                GameObject building = Instantiate(currentBuilding.Prefab, potentialBuildPos, Quaternion.identity);
+                if (currencyManager.CanAfford(currentBuilding.Cost))
+                {
+                    GameObject building = Instantiate(currentBuilding.Prefab, potentialBuildPos, Quaternion.identity);
+                }
             }
         }
 

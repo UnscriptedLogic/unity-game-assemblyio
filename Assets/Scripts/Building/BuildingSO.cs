@@ -9,7 +9,7 @@ namespace BuildManagement
     {
         [SerializeField] private Sprite buildingIcon;
         [SerializeField] private GameObject prefab;
-        [SerializeField] private float cost;
+        [SerializeField] private int cost;
 
         [Header("UI")] 
         [SerializeField] private Color bgColor;
@@ -18,7 +18,7 @@ namespace BuildManagement
 
         public Sprite Icon => buildingIcon;
         public GameObject Prefab => prefab;
-        public float Cost => cost;
+        public int Cost => cost;
 
         public Color BGColor => bgColor;
         public Color BGPriceColor => bgPriceColor;

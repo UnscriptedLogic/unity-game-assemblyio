@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bcfc8a9ea688f0a4c8a49a91db146a0a, type: 3}
+  m_Name: Material Collector
+  m_EditorClassIdentifier: 
+  buildingIcon: {fileID: 21300000, guid: 21bd88cff2f1573469b6f816944d66e8, type: 3}
+  prefab: {fileID: 1476920335100274051, guid: f033d7955f2a66f448180aba99cc15ae, type: 3}
+  cost: 300
+  bgColor: {r: 0.2901961, g: 0.8941177, b: 0.5803922, a: 1}
+  bgPriceColor: {r: 0.15294118, g: 0.44705886, b: 0.32156864, a: 1}
+  borderColor: {r: 0.20392159, g: 0.6039216, b: 0.44705886, a: 1}
